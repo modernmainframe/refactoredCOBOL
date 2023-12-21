@@ -17,11 +17,11 @@ public class CBSBSDG implements Comparable<CBSBSDG> {
     public CBSBSDG(CBSBSDG that) {
     }
     
+    public static void deregAcctStats() {}
+    
     public static void checkAcctStatus() {}
     
     public static void deregAcctStatsExit() {}
-    
-    public static void deregAcctStats() {}
     
     public String toString() {
         StringBuilder s = new StringBuilder();

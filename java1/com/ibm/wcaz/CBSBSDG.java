@@ -19,7 +19,26 @@ public class CBSBSDG implements Comparable<CBSBSDG> {
     
     public static void deregAcctStats() {}
     
-    public static void checkAcctStatus() {}
+    public static void checkAcctStatus(){
+    String wsAccountStatus;
+    Csrgres csrgres = new Csrgres();
+
+    System.out.println("CHECK STATUS PARA");
+    if (wsAccountStatus.equals("ACTIVE    ")) {
+        csrgres.setMessages("DEREGISTER STARTING");
+        wsAccountStatus = "ACCOUNT DEREGISTERING";
+        derigAcctStats();
+    }
+    else if (wsAccountStatus.equals("INACTIVE")) {
+        csrgres.setMessages("CUSTOMER IS NOT REGISTERED");
+    }
+    else if (wsAccountStatus.equals("OTHER")) {
+        System.out.println("NOT Y OR N");
+        csrgres.setMessages("PLEASE CONTACT BANK");
+    }
+}
+
+
     
     public static void deregAcctStatsExit() {}
     

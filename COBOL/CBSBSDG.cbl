@@ -28,7 +28,9 @@
       *         05 CUSTOMER-ID PIC S9(9).
       *         05 MESSAGES PIC X(100).
       ******************************************************************
-       COPY CBSMST.
+			EXEC SQL
+				COPY CBSMST
+			END-EXEC.
       * PATH : .../Cobol Include/CBSMST.cpy
       * THE FOLLOWING VARIABLES ARE USED FROM THE COPYBOOK :
       *01  DCLCBS-ACCT-MSTR-DTL.
@@ -36,7 +38,7 @@
       *    10 H1-ACCOUNT-NAME      PIC X(50).
       *    10 H1-CUSTOMER-ID       PIC S9(9) USAGE COMP.
       ******************************************************************
-        COPY SQLCA.
+      *  COPY SQLCA.
       * PATH : .../Cobol Include/SQLCA
       * THE FOLLOWING VARIABLES ARE USED FROM THE COPYBOOK :
       * 01 SQLCA.

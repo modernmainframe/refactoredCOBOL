@@ -13,7 +13,7 @@
        DATA DIVISION.
        WORKING-STORAGE SECTION.
       ******************************************************************
-      * PATH : .../zOS Cobol/CBSBSDG.cbl
+      * PATH : .../zOS Cobol/CBSBSDG.cbls
         01 WS-ACCOUNT-STATUS  PIC X(10).
         01 WK-CONSTANTS.
            05 WK-INACTIVE              PIC X(10) VALUE 'INACTIVE'.

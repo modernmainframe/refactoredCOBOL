@@ -4,7 +4,8 @@
     "scan": false,
     "exclude": [],
     "files": {
-      "CBSBSDG.cbl": {}
+      "CBSBSDG.cbl": {},
+      "LGACDB01.cbl": {}
     }
   }
 }

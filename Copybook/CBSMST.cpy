@@ -69,7 +69,7 @@
       * INDICATOR VARIABLE STRUCTURE                                   *
       ******************************************************************
        01  ICBS-ACCT-MSTR-DTL.
-           10 INDSTRUC           PIC S9(4) USAGE COMP.
+           10 INDSTRUC           PIC S9(4) USAGE COMP OCCURS 12 TIMES.
       ******************************************************************
       * THE NUMBER OF COLUMNS DESCRIBED BY THIS DECLARATION IS 12      *
       ******************************************************************

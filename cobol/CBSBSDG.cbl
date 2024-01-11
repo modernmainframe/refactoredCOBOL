@@ -28,7 +28,7 @@
       *         05 CUSTOMER-ID PIC S9(9).
       *         05 MESSAGES PIC X(100).
       ******************************************************************
-       COPY CBSMST.
+      *COPY CBSMST.
       * PATH : .../Cobol Include/CBSMST.cpy
       * THE FOLLOWING VARIABLES ARE USED FROM THE COPYBOOK :
       *01  DCLCBS-ACCT-MSTR-DTL.
@@ -36,7 +36,7 @@
       *    10 H1-ACCOUNT-NAME      PIC X(50).
       *    10 H1-CUSTOMER-ID       PIC S9(9) USAGE COMP.
       ******************************************************************
-        COPY SQLCA.
+      * COPY SQLCA.
       * PATH : .../Cobol Include/SQLCA
       * THE FOLLOWING VARIABLES ARE USED FROM THE COPYBOOK :
       * 01 SQLCA.
@@ -48,6 +48,10 @@
              INCLUDE SQLCA
            END-EXEC.
 
+           EXEC SQL
+             INCLUDE CBSMST
+           END-EXEC.
+
        LINKAGE SECTION.
 
        PROCEDURE DIVISION.
@@ -56,7 +60,7 @@
       * PROGRAM PATH : .../zOS Cobol/CBSBSDG.cbl
       * STMT START LINE NUMBER : 131
       * STMT END LINE NUMBER : 144
-            CHECK-ACCT-STATUS.
+       CHECK-ACCT-STATUS.
            DISPLAY 'CHECK STATUS PARA'
            EVALUATE WS-ACCOUNT-STATUS
               WHEN 'ACTIVE    '
@@ -77,7 +81,7 @@
       * PROGRAM PATH : .../zOS Cobol/CBSBSDG.cbl
       * STMT START LINE NUMBER : 148
       * STMT END LINE NUMBER : 158
-            DEREG-ACCT-STATS.
+       DEREG-ACCT-STATS.
            MOVE H1-ACCOUNT-NAME TO CUSTOMER-NAME.
            MOVE H1-CUSTOMER-ID  TO CUSTOMER-ID.
            DISPLAY 'DEREGISTER PARA'
@@ -95,7 +99,7 @@
       * STMT END LINE NUMBER : 160
       * TODO : CHECK THE FOLLOWING <CONTINUE/NEXT SENTENCE/GO TO/GO
       * BACK/RETURN/STOP RUN/EXIT/EXIT PROGRAM> STATEMENT
-            DEREG-ACCT-STATS-EXIT.
+       DEREG-ACCT-STATS-EXIT.
       * TODO : CHECK THE FOLLOWING <CONTINUE/NEXT SENTENCE/GO TO/GO
       * BACK/RETURN/STOP RUN/EXIT/EXIT PROGRAM> STATEMENT
             EXIT.

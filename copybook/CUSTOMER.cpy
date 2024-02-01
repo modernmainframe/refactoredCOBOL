@@ -1,5 +1,5 @@
       ******************************************************************
-      * DCLGEN TABLE(COREBK.CUSTOMER)                                  *
+      * DCLGEN TABLE(LMTEST.CUSTOMER)                                  *
       *        LANGUAGE(COBOL)                                         *
       *        QUOTE                                                   *
       * ... IS THE DCLGEN COMMAND THAT MADE THE FOLLOWING STATEMENTS   *
@@ -14,6 +14,7 @@
       ******************************************************************
       * COBOL DECLARATION FOR TABLE CUSTOMER                           *
       ******************************************************************
+      *
        01  DCLCUSTOMER.
            10 CUID                 PIC S9(9) USAGE COMP.
            10 CUSTNAME             PIC X(60).

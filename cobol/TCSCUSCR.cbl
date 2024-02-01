@@ -13,7 +13,7 @@
        DATA DIVISION.
        WORKING-STORAGE SECTION.
       ******************************************************************
-        COPY SQLCA.
+      *  COPY SQLCA.
       * PATH : .../Cobol Include/SQLCA
       * THE FOLLOWING VARIABLES ARE USED FROM THE COPYBOOK :
       * 01 SQLCA.
@@ -51,6 +51,10 @@
       * SQLCA DB2 communications area
            EXEC SQL
              INCLUDE SQLCA
+           END-EXEC.
+
+           EXEC SQL
+             INCLUDE CUSTOMER
            END-EXEC.
 
        LINKAGE SECTION.

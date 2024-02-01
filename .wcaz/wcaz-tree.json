@@ -1,1 +1,10 @@
-{}
+{
+  "cobol": {
+    "expand": true,
+    "scan": false,
+    "exclude": [],
+    "files": {
+      "TCSCUSCR.cbl": {}
+    }
+  }
+}

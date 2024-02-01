@@ -5,11 +5,11 @@
       * ... IS THE DCLGEN COMMAND THAT MADE THE FOLLOWING STATEMENTS   *
       ******************************************************************
            EXEC SQL DECLARE CUSTOMER TABLE
-           ( CUID                           INTEGER NOT NULL PRIMARY KEY,
-             CUSTNAME                       CHAR(60) NOT NULL,
-             ADDRESS                        CHAR (250) NOT NULL,
-             AGE                            INTEGER NOT NULL,
-             STATUS                         CHAR (1) NOT NULL,
+           ( CUID                          INTEGER NOT NULL PRIMARY KEY,
+             CUSTNAME                      CHAR(60) NOT NULL,
+             ADDRESS                       CHAR (250) NOT NULL,
+             AGE                           INTEGER NOT NULL,
+             STATUS                        CHAR (1) NOT NULL,
            ) END-EXEC.
       ******************************************************************
       * COBOL DECLARATION FOR TABLE CUSTOMER                           *

@@ -1,0 +1,10 @@
+{
+  "cobol": {
+    "expand": true,
+    "scan": false,
+    "exclude": [],
+    "files": {
+      "CBSBSDG.cbl": {}
+    }
+  }
+}

@@ -71,9 +71,9 @@
                     CUSTOMER
                     ( CUID ,
                       CUSTNAME ,
-                      ADDRESS ,
+                      ADDRESS1 ,
                       AGE ,
-                      STATUS )
+                      STATUS1 )
              VALUES
                     ( :CUSTOMER-ID ,
                       :CUSTOMER-NAME ,

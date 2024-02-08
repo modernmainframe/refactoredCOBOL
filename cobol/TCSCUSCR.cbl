@@ -13,7 +13,7 @@
        DATA DIVISION.
        WORKING-STORAGE SECTION.
       ******************************************************************
-        COPY SQLCA.
+      * COPY SQLCA.
       * PATH : .../Cobol Include/SQLCA
       * THE FOLLOWING VARIABLES ARE USED FROM THE COPYBOOK :
       * 01 SQLCA.
@@ -55,6 +55,10 @@
              INCLUDE SQLCA
            END-EXEC.
 
+           EXEC SQL
+             INCLUDE CUSTOMER
+           END-EXEC.
+
        LINKAGE SECTION.
 
        PROCEDURE DIVISION.
@@ -69,9 +73,9 @@
                     CUSTOMER
                     ( CUID ,
                       CUSTNAME ,
-                      ADDRESS ,
+                      ADDRESS1 ,
                       AGE ,
-                      STATUS )
+                      STATUS1 )
              VALUES
                     ( :CUSTOMER-ID ,
                       :CUSTOMER-NAME ,

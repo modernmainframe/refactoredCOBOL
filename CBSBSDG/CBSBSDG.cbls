@@ -1,0 +1,129 @@
+{
+  "id": "68d89a8d-181e-481f-a914-da89d389ae0d",
+  "name": "",
+  "project": "$clientCOBOL_e4c1a474-d37d-42c9-bc62-16424fcbedb5",
+  "codeBlocksSequence": [
+    "Program:COBOL:CBSBSDG 131 144",
+    "Program:COBOL:CBSBSDG 148 158",
+    "Program:COBOL:CBSBSDG 159 160"
+  ],
+  "codeBlocks": {
+    "Program:COBOL:CBSBSDG 131 144": {
+      "program": {
+        "id": "Program:COBOL:CBSBSDG",
+        "name": "Program:COBOL:CBSBSDG",
+        "path": "enc:b61d09c915c708bdbb2677a4f099954c8cef7dcaf930aec8acc46989a11271bdb9fd23d772811923217daf2164332150e8900f8652c08590dd8b2880b64d1f90d0c1e689a9121f493ab74f610d2c2ca07a05cde3a6e36180",
+        "addedByUser": false
+      },
+      "stmtStartLineNumber": 131,
+      "stmtEndLineNumber": 144,
+      "code": "        CHECK-ACCT-STATUS.\n           DISPLAY 'CHECK STATUS PARA'\n           EVALUATE WS-ACCOUNT-STATUS\n              WHEN 'ACTIVE    '\n               DISPLAY 'DEREGISTER STARTING'\n               MOVE 'ACCOUNT DEREGISTERING' TO MESSAGES\n               PERFORM DEREG-ACCT-STATS\n                  THRU DEREG-ACCT-STATS-EXIT\n              WHEN 'INACTIVE'\n               MOVE 'CUSTOMER IS NOT REGISTERED' TO MESSAGES\n              WHEN 'OTHER'\n               DISPLAY 'NOT Y OR N'\n               MOVE 'PLEASE CONTACT BANK' TO MESSAGES\n           END-EVALUATE.",
+      "committed": false,
+      "uniqueId": "Program:COBOL:CBSBSDG 131 144",
+      "tags": [
+        "paragraph"
+      ],
+      "metadata": {
+        "copybooks": [
+          {
+            "uniqueId": "Copybook:CSDGREQ.cpy",
+            "path": "enc:e83f3980a8ab9b8885b29480f22f8894c5514c8b73e0c4163ce4341468ecc68d34080f77a3438716f8efc0b9163a48cb9e384b6006dec09ec3dfa0bb50e27441517c6342e89e41b47a209ab833b32a6fc01678ba315cc9687759612483005339c585fb86097d9f20"
+          },
+          {
+            "uniqueId": "Copybook:SQLCA.txt",
+            "path": "enc:509c265036950ba6851d2fdb4ac920f037ca8fa7c271cfc002a8c13eb8aa365da6e18ca7fa3c1dca37319f049bd30ec3893d0726d449d922cbfae70f9e740c422f0ef9940a34150a9de49ef050ce64be9c075c510d10090ed1e1d009775f87ad8f94ba8597050591"
+          },
+          {
+            "uniqueId": "Copybook:CBSMST.cpy",
+            "path": "enc:1b597b00583a59361e804ada80852f789f26082e23f88f22e3701e593771c819c15adc2614f096b0c8e365a34d32734a0c318cc3e474dcfa362f05eccbab3669bd149b584386e136146b57730cdd35cdd1ed428ce2b8b8d0bb641d0eb33c90dc413cba984d959340"
+          },
+          {
+            "uniqueId": "Copybook:CSDGRES.cpy",
+            "path": "enc:47f2e3f26e52535c5de56d0d0240f9befef60d4eeb6f9be8ecfcccf718fb8e719309f438efa69a10cd3c8805948841de5c53217ac9df033784ebc5357654757116d0961ea3f74ab16b8993f99418a7665e7b07faece538a99fe628eeb8d3ef4cbcf97471202cf19d"
+          }
+        ],
+        "programs": [
+          "Program:COBOL:CBSBSDG"
+        ]
+      }
+    },
+    "Program:COBOL:CBSBSDG 148 158": {
+      "program": {
+        "id": "Program:COBOL:CBSBSDG",
+        "name": "Program:COBOL:CBSBSDG",
+        "path": "enc:1ad7335d21b31fb3121bbbd8791abe481e2608ca0d15c9ca41831d81d7af891eeeec8352fc918ad5ff2063015f144fb3e2c47e2f30e4b11e9909fcbcc6e62cd727e105029f4ffc39974fa1836d44b8c8c34d324e3a197a61",
+        "addedByUser": false
+      },
+      "stmtStartLineNumber": 148,
+      "stmtEndLineNumber": 158,
+      "code": "        DEREG-ACCT-STATS.\n           MOVE H1-ACCOUNT-NAME TO CUSTOMER-NAME.\n           MOVE H1-CUSTOMER-ID  TO CUSTOMER-ID.\n           DISPLAY 'DEREGISTER PARA'\n           EXEC SQL\n                UPDATE CBS_ACCT_MSTR_DTL\n                   SET ACCOUNT_STATUS = :WK-INACTIVE\n                 WHERE ACCOUNT_NUMBER = :H1-ACCOUNT-NUMBER\n           END-EXEC.\n           DISPLAY SQLCODE\n            MOVE \"CUSTOMER DEREGISTERED SUCESSFULLY\" TO MESSAGES.",
+      "committed": false,
+      "uniqueId": "Program:COBOL:CBSBSDG 148 158",
+      "tags": [
+        "paragraph"
+      ],
+      "metadata": {
+        "copybooks": [
+          {
+            "uniqueId": "Copybook:CSDGREQ.cpy",
+            "path": "enc:e83f3980a8ab9b8885b29480f22f8894c5514c8b73e0c4163ce4341468ecc68d34080f77a3438716f8efc0b9163a48cb9e384b6006dec09ec3dfa0bb50e27441517c6342e89e41b47a209ab833b32a6fc01678ba315cc9687759612483005339c585fb86097d9f20"
+          },
+          {
+            "uniqueId": "Copybook:SQLCA.txt",
+            "path": "enc:509c265036950ba6851d2fdb4ac920f037ca8fa7c271cfc002a8c13eb8aa365da6e18ca7fa3c1dca37319f049bd30ec3893d0726d449d922cbfae70f9e740c422f0ef9940a34150a9de49ef050ce64be9c075c510d10090ed1e1d009775f87ad8f94ba8597050591"
+          },
+          {
+            "uniqueId": "Copybook:CBSMST.cpy",
+            "path": "enc:1b597b00583a59361e804ada80852f789f26082e23f88f22e3701e593771c819c15adc2614f096b0c8e365a34d32734a0c318cc3e474dcfa362f05eccbab3669bd149b584386e136146b57730cdd35cdd1ed428ce2b8b8d0bb641d0eb33c90dc413cba984d959340"
+          },
+          {
+            "uniqueId": "Copybook:CSDGRES.cpy",
+            "path": "enc:47f2e3f26e52535c5de56d0d0240f9befef60d4eeb6f9be8ecfcccf718fb8e719309f438efa69a10cd3c8805948841de5c53217ac9df033784ebc5357654757116d0961ea3f74ab16b8993f99418a7665e7b07faece538a99fe628eeb8d3ef4cbcf97471202cf19d"
+          }
+        ],
+        "programs": [
+          "Program:COBOL:CBSBSDG"
+        ]
+      }
+    },
+    "Program:COBOL:CBSBSDG 159 160": {
+      "program": {
+        "id": "Program:COBOL:CBSBSDG",
+        "name": "Program:COBOL:CBSBSDG",
+        "path": "enc:b1f9ef055ea0e333276a349b00263b090e20fd2472f5dad8c1984400190d8412d5e398aaf93f56c40b754f46edf073258d4751a85ce0e1dcffa6bf0affbace3ad63dbd21e29e8a73dd735541c0b883dc5153686d72d4337d",
+        "addedByUser": false
+      },
+      "stmtStartLineNumber": 159,
+      "stmtEndLineNumber": 160,
+      "code": "        DEREG-ACCT-STATS-EXIT.\n            EXIT.",
+      "committed": false,
+      "uniqueId": "Program:COBOL:CBSBSDG 159 160",
+      "tags": [
+        "paragraph"
+      ],
+      "metadata": {
+        "copybooks": [
+          {
+            "uniqueId": "Copybook:CSDGREQ.cpy",
+            "path": "enc:e83f3980a8ab9b8885b29480f22f8894c5514c8b73e0c4163ce4341468ecc68d34080f77a3438716f8efc0b9163a48cb9e384b6006dec09ec3dfa0bb50e27441517c6342e89e41b47a209ab833b32a6fc01678ba315cc9687759612483005339c585fb86097d9f20"
+          },
+          {
+            "uniqueId": "Copybook:SQLCA.txt",
+            "path": "enc:509c265036950ba6851d2fdb4ac920f037ca8fa7c271cfc002a8c13eb8aa365da6e18ca7fa3c1dca37319f049bd30ec3893d0726d449d922cbfae70f9e740c422f0ef9940a34150a9de49ef050ce64be9c075c510d10090ed1e1d009775f87ad8f94ba8597050591"
+          },
+          {
+            "uniqueId": "Copybook:CBSMST.cpy",
+            "path": "enc:1b597b00583a59361e804ada80852f789f26082e23f88f22e3701e593771c819c15adc2614f096b0c8e365a34d32734a0c318cc3e474dcfa362f05eccbab3669bd149b584386e136146b57730cdd35cdd1ed428ce2b8b8d0bb641d0eb33c90dc413cba984d959340"
+          },
+          {
+            "uniqueId": "Copybook:CSDGRES.cpy",
+            "path": "enc:47f2e3f26e52535c5de56d0d0240f9befef60d4eeb6f9be8ecfcccf718fb8e719309f438efa69a10cd3c8805948841de5c53217ac9df033784ebc5357654757116d0961ea3f74ab16b8993f99418a7665e7b07faece538a99fe628eeb8d3ef4cbcf97471202cf19d"
+          }
+        ],
+        "programs": [
+          "Program:COBOL:CBSBSDG"
+        ]
+      }
+    }
+  }
+}

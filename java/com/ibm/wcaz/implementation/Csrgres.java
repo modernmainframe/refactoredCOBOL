@@ -72,13 +72,11 @@ public class Csrgres implements Comparable<Csrgres> {
     public void setMessages(String messages) {
         this.messages = messages;
     }
-    
     public void reset() {
         customerName = "";
         customerId = 0;
         messages = "";
     }
-    
     
     public String toString() {
         StringBuilder s = new StringBuilder();
@@ -131,15 +129,15 @@ public class Csrgres implements Comparable<Csrgres> {
         factory.setStringEncoding("IBM-1047");
     }
     
-    private static final StringField CUSTOMERNAME = factory.getStringField(50);
-    private static final ExternalDecimalAsLongField CUSTOMERID = factory.getExternalDecimalAsLongField(10, true);
+    private static final StringField CUSTOMER_NAME = factory.getStringField(50);
+    private static final ExternalDecimalAsLongField CUSTOMER_ID = factory.getExternalDecimalAsLongField(10, true);
     private static final StringField MESSAGES = factory.getStringField(100);
     public static final int SIZE = factory.getOffset();
     // End of COBOL-compatible binary serialization metadata
     
     public byte[] getBytes(byte[] bytes, int offset) {
-        CUSTOMERNAME.putString(customerName, bytes, offset);
-        CUSTOMERID.putLong(customerId, bytes, offset);
+        CUSTOMER_NAME.putString(customerName, bytes, offset);
+        CUSTOMER_ID.putLong(customerId, bytes, offset);
         MESSAGES.putString(messages, bytes, offset);
         return bytes;
     }
@@ -154,7 +152,7 @@ public class Csrgres implements Comparable<Csrgres> {
     
     public final String toByteString() {
         try {
-            return new String(getBytes(), factory.getStringEncoding());
+            return new String(getBytes(), factory.getStringEncoding()).stripTrailing();
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -166,8 +164,8 @@ public class Csrgres implements Comparable<Csrgres> {
             Arrays.fill(newBytes, bytes.length, SIZE + offset, (byte)0x40 /*default EBCDIC space character*/);
             bytes = newBytes;
         }
-        customerName = CUSTOMERNAME.getString(bytes, offset);
-        customerId = CUSTOMERID.getLong(bytes, offset);
+        customerName = CUSTOMER_NAME.getString(bytes, offset);
+        customerId = CUSTOMER_ID.getLong(bytes, offset);
         messages = MESSAGES.getString(bytes, offset);
     }
     
@@ -187,4 +185,5 @@ public class Csrgres implements Comparable<Csrgres> {
     public int numBytes() {
         return SIZE;
     }
+    
 }

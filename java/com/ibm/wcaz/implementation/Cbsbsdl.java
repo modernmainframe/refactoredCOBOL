@@ -36,15 +36,12 @@ public class Cbsbsdl implements Comparable<Cbsbsdl> {
     }
     
     
-    public void reset() {
-    }
+    public static void deregAcctStatsExit() {}
     
-    
-    public static void deregAcctStats(){
+    public static void deregAcctStats() {
     Csrgres csrgres = new Csrgres();
     DclcbsAcctMstrDtl dclcbsAcctMstrDtl = new DclcbsAcctMstrDtl();
     String wkInactive = "INACTIVE";
-
     csrgres.setCustomerName(dclcbsAcctMstrDtl.getH1AccountName());
     csrgres.setCustomerId(dclcbsAcctMstrDtl.getH1CustomerId());
     System.out.println("DEREGISTER PARA");
@@ -55,46 +52,35 @@ public class Cbsbsdl implements Comparable<Cbsbsdl> {
         ps.setBigDecimal(2, dclcbsAcctMstrDtl.getH1AccountNumber());
         ps.executeUpdate();
         ps.close();
-    }
-    catch(SQLException exception) {
+    } catch (SQLException exception) {
         System.out.println(exception);
         return;
     }
-    System.out.println(JdbcConnection.getSqlCode());
+    // TODO: 'exception' not declared locally. Please verify it exists.
+    System.out.println(exception);
     csrgres.setMessages("CUSTOMER DEREGISTERED SUCESSFULLY");
 }
 
     
-    public static void checkAcctStatus(){
+    public static void checkAcctStatus() {
     Csrgres csrgres = new Csrgres();
-    String wsaccountstatus = "";
-
+    String wsAccountStatus = "";
     System.out.println("CHECK STATUS PARA");
-    switch(wsaccountstatus){
-        case "ACTIVE    ":
-            System.out.println("DEREGISTER STARTING");
-            csrgres.setMessages("ACCOUNT DEREGISTERING");
-            Cbsbsdl.deregAcctStats();
-            break;
-        case "INACTIVE":
-            csrgres.setMessages("CUSTOMER IS NOT REGISTERED");
-            break;
-        case "OTHER":
-            System.out.println("NOT Y OR N");
-            csrgres.setMessages("PLEASE CONTACT BANK");
-            break;
+    if (wsAccountStatus.equals("ACTIVE    ")) {
+        csrgres.setMessages("ACCOUNT DEREGISTERING");
+        Cbsbsdl.deregAcctStats();
+    } else if (wsAccountStatus.equals("INACTIVE")) {
+        csrgres.setMessages("CUSTOMER IS NOT REGISTERED");
+    } else if (wsAccountStatus.equals("OTHER")) {
+        System.out.println("NOT Y OR N");
+        csrgres.setMessages("PLEASE CONTACT BANK");
     }
-}
-
-    
-    public static void deregAcctStatsExit(){
 }
 
     
     public static void main(String[] args) {
         checkAcctStatus();
     }
-    
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("}");
@@ -145,7 +131,7 @@ public class Cbsbsdl implements Comparable<Cbsbsdl> {
     
     public final String toByteString() {
         try {
-            return new String(getBytes(), factory.getStringEncoding());
+            return new String(getBytes(), factory.getStringEncoding()).stripTrailing();
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -175,4 +161,5 @@ public class Cbsbsdl implements Comparable<Cbsbsdl> {
     public int numBytes() {
         return SIZE;
     }
+    
 }

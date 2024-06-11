@@ -74,13 +74,11 @@ public class DclcbsAcctMstrDtl implements Comparable<DclcbsAcctMstrDtl> {
     public void setH1CustomerId(long h1CustomerId) {
         this.h1CustomerId = h1CustomerId;
     }
-    
     public void reset() {
         h1AccountNumber = BigDecimal.ZERO;
         h1AccountName = "";
         h1CustomerId = 0;
     }
-    
     
     public String toString() {
         StringBuilder s = new StringBuilder();
@@ -133,16 +131,16 @@ public class DclcbsAcctMstrDtl implements Comparable<DclcbsAcctMstrDtl> {
         factory.setStringEncoding("IBM-1047");
     }
     
-    private static final BinaryAsBigDecimalField H1ACCOUNTNUMBER = factory.getBinaryAsBigDecimalField(19, 0, true);
-    private static final StringField H1ACCOUNTNAME = factory.getStringField(50);
-    private static final BinaryAsLongField H1CUSTOMERID = factory.getBinaryAsLongField(10, true);
+    private static final BinaryAsBigDecimalField H_1_ACCOUNT_NUMBER = factory.getBinaryAsBigDecimalField(19, 0, true);
+    private static final StringField H_1_ACCOUNT_NAME = factory.getStringField(50);
+    private static final BinaryAsLongField H_1_CUSTOMER_ID = factory.getBinaryAsLongField(10, true);
     public static final int SIZE = factory.getOffset();
     // End of COBOL-compatible binary serialization metadata
     
     public byte[] getBytes(byte[] bytes, int offset) {
-        H1ACCOUNTNUMBER.putBigDecimal(h1AccountNumber, bytes, offset);
-        H1ACCOUNTNAME.putString(h1AccountName, bytes, offset);
-        H1CUSTOMERID.putLong(h1CustomerId, bytes, offset);
+        H_1_ACCOUNT_NUMBER.putBigDecimal(h1AccountNumber, bytes, offset);
+        H_1_ACCOUNT_NAME.putString(h1AccountName, bytes, offset);
+        H_1_CUSTOMER_ID.putLong(h1CustomerId, bytes, offset);
         return bytes;
     }
     
@@ -156,7 +154,7 @@ public class DclcbsAcctMstrDtl implements Comparable<DclcbsAcctMstrDtl> {
     
     public final String toByteString() {
         try {
-            return new String(getBytes(), factory.getStringEncoding());
+            return new String(getBytes(), factory.getStringEncoding()).stripTrailing();
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -168,9 +166,9 @@ public class DclcbsAcctMstrDtl implements Comparable<DclcbsAcctMstrDtl> {
             Arrays.fill(newBytes, bytes.length, SIZE + offset, (byte)0x40 /*default EBCDIC space character*/);
             bytes = newBytes;
         }
-        h1AccountNumber = H1ACCOUNTNUMBER.getBigDecimal(bytes, offset);
-        h1AccountName = H1ACCOUNTNAME.getString(bytes, offset);
-        h1CustomerId = H1CUSTOMERID.getLong(bytes, offset);
+        h1AccountNumber = H_1_ACCOUNT_NUMBER.getBigDecimal(bytes, offset);
+        h1AccountName = H_1_ACCOUNT_NAME.getString(bytes, offset);
+        h1CustomerId = H_1_CUSTOMER_ID.getLong(bytes, offset);
     }
     
     
@@ -189,4 +187,5 @@ public class DclcbsAcctMstrDtl implements Comparable<DclcbsAcctMstrDtl> {
     public int numBytes() {
         return SIZE;
     }
+    
 }

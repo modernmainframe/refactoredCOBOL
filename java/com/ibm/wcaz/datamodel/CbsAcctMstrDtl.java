@@ -174,7 +174,6 @@ public class CbsAcctMstrDtl implements Comparable<CbsAcctMstrDtl> {
     public void setUpdTimestamp(Date updTimestamp) {
         this.updTimestamp = updTimestamp;
     }
-    
     public void reset() {
         accountNumber = 0;
         baseBranch = "";
@@ -189,7 +188,6 @@ public class CbsAcctMstrDtl implements Comparable<CbsAcctMstrDtl> {
         updUserid = "";
         updTimestamp = new Date(0);
     }
-    
     
     public String toString() {
         StringBuilder s = new StringBuilder();
@@ -305,36 +303,36 @@ public class CbsAcctMstrDtl implements Comparable<CbsAcctMstrDtl> {
         factory.setStringEncoding("IBM-1047");
     }
     
-    private static final ExternalDecimalAsIntField ACCOUNTNUMBER = factory.getExternalDecimalAsIntField(9, true);
-    private static final StringField BASEBRANCH = factory.getStringField(21);
-    private static final StringField ACCOUNTNAME = factory.getStringField(51);
-    private static final StringField PRODUCTCODE = factory.getStringField(6);
-    private static final ExternalDecimalAsIntField CUSTOMERID = factory.getExternalDecimalAsIntField(5, true);
-    private static final StringField ACCOUNTSTATUS = factory.getStringField(11);
-    private static final ExternalDecimalAsIntField PAYMENTLIMIT = factory.getExternalDecimalAsIntField(5, true);
+    private static final ExternalDecimalAsIntField ACCOUNT_NUMBER = factory.getExternalDecimalAsIntField(9, true);
+    private static final StringField BASE_BRANCH = factory.getStringField(21);
+    private static final StringField ACCOUNT_NAME = factory.getStringField(51);
+    private static final StringField PRODUCT_CODE = factory.getStringField(6);
+    private static final ExternalDecimalAsIntField CUSTOMER_ID = factory.getExternalDecimalAsIntField(5, true);
+    private static final StringField ACCOUNT_STATUS = factory.getStringField(11);
+    private static final ExternalDecimalAsIntField PAYMENT_LIMIT = factory.getExternalDecimalAsIntField(5, true);
     private static final StringField CURRENCY = factory.getStringField(4);
-    private static final StringField COMPLIANCESTATUS = factory.getStringField(6);
-    private static final StringField LASTACTIVITYDATE = factory.getStringField(8);
-    private static final DateTimeFormatter LASTACTIVITYDATE_FMT = DateTimeFormatter.ofPattern("yyyyMMdd");
-    private static final StringField UPDUSERID = factory.getStringField(11);
-    private static final StringField UPDTIMESTAMP = factory.getStringField(14);
-    private static final DateTimeFormatter UPDTIMESTAMP_FMT = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+    private static final StringField COMPLIANCE_STATUS = factory.getStringField(6);
+    private static final StringField LAST_ACTIVITY_DATE = factory.getStringField(8);
+    private static final DateTimeFormatter LAST_ACTIVITY_DATE_FMT = DateTimeFormatter.ofPattern("yyyyMMdd");
+    private static final StringField UPD_USERID = factory.getStringField(11);
+    private static final StringField UPD_TIMESTAMP = factory.getStringField(14);
+    private static final DateTimeFormatter UPD_TIMESTAMP_FMT = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
     public static final int SIZE = factory.getOffset();
     // End of COBOL-compatible binary serialization metadata
     
     public byte[] getBytes(byte[] bytes, int offset) {
-        ACCOUNTNUMBER.putInt(accountNumber, bytes, offset);
-        BASEBRANCH.putString(baseBranch, bytes, offset);
-        ACCOUNTNAME.putString(accountName, bytes, offset);
-        PRODUCTCODE.putString(productCode, bytes, offset);
-        CUSTOMERID.putInt(customerId, bytes, offset);
-        ACCOUNTSTATUS.putString(accountStatus, bytes, offset);
-        PAYMENTLIMIT.putInt(paymentLimit, bytes, offset);
+        ACCOUNT_NUMBER.putInt(accountNumber, bytes, offset);
+        BASE_BRANCH.putString(baseBranch, bytes, offset);
+        ACCOUNT_NAME.putString(accountName, bytes, offset);
+        PRODUCT_CODE.putString(productCode, bytes, offset);
+        CUSTOMER_ID.putInt(customerId, bytes, offset);
+        ACCOUNT_STATUS.putString(accountStatus, bytes, offset);
+        PAYMENT_LIMIT.putInt(paymentLimit, bytes, offset);
         CURRENCY.putString(currency, bytes, offset);
-        COMPLIANCESTATUS.putString(complianceStatus, bytes, offset);
-        LASTACTIVITYDATE.putString(lastActivityDate.toLocalDate().format(LASTACTIVITYDATE_FMT), bytes, offset);
-        UPDUSERID.putString(updUserid, bytes, offset);
-        UPDTIMESTAMP.putString(updTimestamp.toLocalDate().format(UPDTIMESTAMP_FMT), bytes, offset);
+        COMPLIANCE_STATUS.putString(complianceStatus, bytes, offset);
+        LAST_ACTIVITY_DATE.putString(lastActivityDate.toLocalDate().format(LAST_ACTIVITY_DATE_FMT), bytes, offset);
+        UPD_USERID.putString(updUserid, bytes, offset);
+        UPD_TIMESTAMP.putString(updTimestamp.toLocalDate().format(UPD_TIMESTAMP_FMT), bytes, offset);
         return bytes;
     }
     
@@ -348,7 +346,7 @@ public class CbsAcctMstrDtl implements Comparable<CbsAcctMstrDtl> {
     
     public final String toByteString() {
         try {
-            return new String(getBytes(), factory.getStringEncoding());
+            return new String(getBytes(), factory.getStringEncoding()).stripTrailing();
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -360,18 +358,18 @@ public class CbsAcctMstrDtl implements Comparable<CbsAcctMstrDtl> {
             Arrays.fill(newBytes, bytes.length, SIZE + offset, (byte)0x40 /*default EBCDIC space character*/);
             bytes = newBytes;
         }
-        accountNumber = ACCOUNTNUMBER.getInt(bytes, offset);
-        baseBranch = BASEBRANCH.getString(bytes, offset);
-        accountName = ACCOUNTNAME.getString(bytes, offset);
-        productCode = PRODUCTCODE.getString(bytes, offset);
-        customerId = CUSTOMERID.getInt(bytes, offset);
-        accountStatus = ACCOUNTSTATUS.getString(bytes, offset);
-        paymentLimit = PAYMENTLIMIT.getInt(bytes, offset);
+        accountNumber = ACCOUNT_NUMBER.getInt(bytes, offset);
+        baseBranch = BASE_BRANCH.getString(bytes, offset);
+        accountName = ACCOUNT_NAME.getString(bytes, offset);
+        productCode = PRODUCT_CODE.getString(bytes, offset);
+        customerId = CUSTOMER_ID.getInt(bytes, offset);
+        accountStatus = ACCOUNT_STATUS.getString(bytes, offset);
+        paymentLimit = PAYMENT_LIMIT.getInt(bytes, offset);
         currency = CURRENCY.getString(bytes, offset);
-        complianceStatus = COMPLIANCESTATUS.getString(bytes, offset);
-        lastActivityDate = Date.valueOf(LocalDate.parse(LASTACTIVITYDATE.getString(bytes, offset), LASTACTIVITYDATE_FMT));
-        updUserid = UPDUSERID.getString(bytes, offset);
-        updTimestamp = Date.valueOf(LocalDate.parse(UPDTIMESTAMP.getString(bytes, offset), UPDTIMESTAMP_FMT));
+        complianceStatus = COMPLIANCE_STATUS.getString(bytes, offset);
+        lastActivityDate = Date.valueOf(LocalDate.parse(LAST_ACTIVITY_DATE.getString(bytes, offset), LAST_ACTIVITY_DATE_FMT));
+        updUserid = UPD_USERID.getString(bytes, offset);
+        updTimestamp = Date.valueOf(LocalDate.parse(UPD_TIMESTAMP.getString(bytes, offset), UPD_TIMESTAMP_FMT));
     }
     
     
@@ -390,4 +388,5 @@ public class CbsAcctMstrDtl implements Comparable<CbsAcctMstrDtl> {
     public int numBytes() {
         return SIZE;
     }
+    
 }
